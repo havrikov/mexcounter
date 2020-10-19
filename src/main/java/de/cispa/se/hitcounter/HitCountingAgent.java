@@ -5,8 +5,10 @@ import net.bytebuddy.asm.Advice;
 
 import java.lang.instrument.Instrumentation;
 
+import static net.bytebuddy.matcher.ElementMatchers.isAbstract;
 import static net.bytebuddy.matcher.ElementMatchers.isMethod;
 import static net.bytebuddy.matcher.ElementMatchers.nameStartsWith;
+import static net.bytebuddy.matcher.ElementMatchers.not;
 
 public class HitCountingAgent {
     public static void premain(String arguments,
@@ -16,17 +18,16 @@ public class HitCountingAgent {
         HitCountWriter hitCountWriter = new HitCountWriter(argParser.outputFile);
         Runtime.getRuntime().addShutdownHook(new Thread(hitCountWriter::writeResultsToFile));
 
-        new AgentBuilder.Default()
-                .disableClassFormatChanges()
-                .type(nameStartsWith(argParser.packagePrefix))
-//                .transform(new AgentBuilder.Transformer.ForAdvice()
-//                        .include(HitCountingAgent.class.getClassLoader())
-//                        .advice(isMethod(), "de.cispa.se.hitcounter.HitCountingInterceptor")
-//                )
-                .transform((builder, type, classLoader, module) -> builder
-                        .visit(Advice.to(HitCountingInterceptor.class).on(isMethod()))
-                )
-                .installOn(instrumentation);
+        buildAgent(argParser.packagePrefix).installOn(instrumentation);
+    }
+
+    static AgentBuilder buildAgent(String prefix) {
+        return new AgentBuilder.Default()
+            .disableClassFormatChanges()
+            .type(nameStartsWith(prefix))
+            .transform((builder, type, classLoader, module) -> builder
+                    .visit(Advice.to(HitCountingInterceptor.class).on(isMethod().and(not(isAbstract()))))
+            );
     }
 
     /**
