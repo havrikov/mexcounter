@@ -41,7 +41,8 @@ public class HitCountingAgent {
             String errorMessage = "You must invoke the agent with arguments in the form \"-javaagent:agent.jar=package-prefix,output-file-path\"";
             if (arguments == null) throw new IllegalArgumentException(errorMessage);
             int commaIndex = arguments.indexOf(',');
-            if (-1 == commaIndex) throw new IllegalArgumentException(errorMessage);
+            if (commaIndex <= 0 || commaIndex == arguments.length() - 1)
+                throw new IllegalArgumentException(errorMessage);
             packagePrefix = arguments.substring(0, commaIndex);
             outputFile = arguments.substring(commaIndex + 1);
         }
