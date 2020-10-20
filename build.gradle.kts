@@ -18,6 +18,7 @@ repositories {
 dependencies {
     val byteBuddyVersion = "1.10.17"
     implementation("net.bytebuddy", "byte-buddy", byteBuddyVersion)
+    implementation("com.opencsv", "opencsv", "5.2")
 
     testImplementation("junit", "junit", "4.13.1")
     testImplementation("net.bytebuddy", "byte-buddy-agent", byteBuddyVersion)

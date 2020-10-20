@@ -3,6 +3,7 @@ package de.cispa.se.hitcounter;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.asm.Advice;
 
+import java.io.IOException;
 import java.lang.instrument.Instrumentation;
 
 import static net.bytebuddy.matcher.ElementMatchers.isAbstract;
@@ -11,14 +12,17 @@ import static net.bytebuddy.matcher.ElementMatchers.nameStartsWith;
 import static net.bytebuddy.matcher.ElementMatchers.not;
 
 public class HitCountingAgent {
-    public static void premain(String arguments,
-                               Instrumentation instrumentation) {
+    public static void premain(String arguments, Instrumentation instrumentation) throws IOException {
         ArgParser argParser = new ArgParser(arguments);
 
-        HitCountWriter hitCountWriter = new HitCountWriter(argParser.outputFile);
-        Runtime.getRuntime().addShutdownHook(new Thread(hitCountWriter::writeResultsToFile));
+        installResultOutput(argParser);
 
         buildAgent(argParser.packagePrefix).installOn(instrumentation);
+    }
+
+    private static void installResultOutput(ArgParser argParser) throws IOException {
+        HitCountWriter hitCountWriter = new HitCountWriter(argParser.outputFile);
+        Runtime.getRuntime().addShutdownHook(new Thread(hitCountWriter::writeResultsToFile));
     }
 
     static AgentBuilder buildAgent(String prefix) {
