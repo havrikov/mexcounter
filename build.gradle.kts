@@ -2,8 +2,8 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     java
-    id("com.github.johnrengelman.shadow") version "6.1.0"
     kotlin("jvm") version "1.4.10"
+    id("com.github.johnrengelman.shadow") version "6.1.0"
 }
 
 group = "de.cispa.se"
@@ -15,24 +15,32 @@ repositories {
 }
 
 dependencies {
-    implementation("net.bytebuddy", "byte-buddy", "1.10.17")
-    testImplementation("net.bytebuddy", "byte-buddy-agent", "1.10.17")
+    val byteBuddyVersion = "1.10.17"
+    implementation("net.bytebuddy", "byte-buddy", byteBuddyVersion)
+
+    testImplementation("junit", "junit", "4.13.1")
+    testImplementation("net.bytebuddy", "byte-buddy-agent", byteBuddyVersion)
 }
 
-tasks.withType<JavaCompile> {
-    options.release.set(11)
-}
+tasks {
+    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions.jvmTarget = "1.8"
+    }
 
+    withType<JavaCompile> {
+        options.release.set(8)
+    }
 
-val shadow = tasks.named<ShadowJar>("shadowJar") {
-    archiveClassifier.set("")
-    manifest.attributes["Premain-Class"] = "de.cispa.se.hitcounter.HitCountingAgent"
-}
+    val shadow = named<ShadowJar>("shadowJar") {
+        archiveClassifier.set("")
+        manifest.attributes["Premain-Class"] = "de.cispa.se.hitcounter.HitCountingAgent"
+    }
 
-tasks.named("assemble") {
-    dependsOn(shadow)
-}
+    named("assemble") {
+        dependsOn(shadow)
+    }
 
-tasks.withType<Jar> {
-    enabled = name == "shadowJar"
+    withType<Jar> {
+        enabled = name == "shadowJar"
+    }
 }
