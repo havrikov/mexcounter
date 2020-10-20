@@ -12,7 +12,7 @@ public class HitCountWriter {
     public void writeResultsToFile() {
         System.out.println("Writing into " + outputFile);
         CounterState.METHOD_COUNTERS.forEach((method, hitCount) ->
-                System.out.println(method + ": " + hitCount)
+            System.out.println(method + ": " + hitCount)
         );
     }
 }

@@ -26,7 +26,7 @@ public class HitCountingAgent {
             .disableClassFormatChanges()
             .type(nameStartsWith(prefix))
             .transform((builder, type, classLoader, module) -> builder
-                    .visit(Advice.to(HitCountingInterceptor.class).on(isMethod().and(not(isAbstract()))))
+                .visit(Advice.to(HitCountingInterceptor.class).on(isMethod().and(not(isAbstract()))))
             );
     }
 

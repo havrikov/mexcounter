@@ -3,7 +3,7 @@ A Java agent that counts method executions.
 
 ## Usage
 
-Run it with 
+Run it with
 ```bash
 java -javaagent:path-to-agent.jar=package.prefix,output.csv -jar path-to-target.jar
 ```
@@ -13,7 +13,7 @@ Where
 
 ## Building
 
-Build the agent jar with 
+Build the agent jar with
 ```bash
 ./gradlew build
 ```
