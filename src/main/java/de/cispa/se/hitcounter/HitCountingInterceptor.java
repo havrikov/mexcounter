@@ -6,6 +6,6 @@ public class HitCountingInterceptor {
 
     @Advice.OnMethodEnter
     public static void onEnter(@Advice.Origin("#t.#m#s") String methodName) {
-        CounterState.METHOD_COUNTERS.merge(methodName, 1, Integer::sum);
+        CounterState.report(methodName);
     }
 }

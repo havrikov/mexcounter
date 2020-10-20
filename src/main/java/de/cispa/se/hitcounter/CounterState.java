@@ -9,4 +9,8 @@ public class CounterState {
     private CounterState() {
         // no instances
     }
+
+    public static void report(String methodName) {
+        METHOD_COUNTERS.merge(methodName, 1, Integer::sum);
+    }
 }
