@@ -5,7 +5,7 @@ import net.bytebuddy.asm.Advice;
 public class HitCountingInterceptor {
 
     @Advice.OnMethodEnter
-    public static void onEnter(@Advice.Origin("#t.#m#s") String methodName) {
+    public static void onEnter(@Advice.Origin("#t::#m#s") String methodName) {
         CounterState.report(methodName);
     }
 }

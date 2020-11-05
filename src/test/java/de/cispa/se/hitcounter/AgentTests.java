@@ -40,7 +40,7 @@ public class AgentTests {
         new Foo().foo();
 
         Assert.assertFalse(CounterState.METHOD_COUNTERS.isEmpty());
-        Assert.assertEquals(2, CounterState.METHOD_COUNTERS.getOrDefault("com.example.Foo.bar()", 0).intValue());
-        Assert.assertEquals(1, CounterState.METHOD_COUNTERS.getOrDefault("com.example.Qux.qux()", 0).intValue());
+        Assert.assertEquals(2, CounterState.METHOD_COUNTERS.getOrDefault("com.example.Foo::bar()", 0).intValue());
+        Assert.assertEquals(1, CounterState.METHOD_COUNTERS.getOrDefault("com.example.Qux::qux()", 0).intValue());
     }
 }
