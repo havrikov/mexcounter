@@ -1,1 +1,1 @@
-rootProject.name = "hitcounter"
+rootProject.name = "mexcounter"

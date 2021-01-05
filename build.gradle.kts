@@ -35,7 +35,7 @@ tasks {
 
     val shadow = named<ShadowJar>("shadowJar") {
         archiveClassifier.set("")
-        manifest.attributes["Premain-Class"] = "de.cispa.se.hitcounter.HitCountingAgent"
+        manifest.attributes["Premain-Class"] = "de.cispa.se.mexcounter.HitCountingAgent"
     }
 
     named("assemble") {

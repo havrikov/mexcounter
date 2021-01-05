@@ -1,4 +1,4 @@
-package de.cispa.se.hitcounter;
+package de.cispa.se.mexcounter;
 
 import com.example.Foo;
 import net.bytebuddy.agent.ByteBuddyAgent;
@@ -33,7 +33,7 @@ public class AgentTests {
     public void hitCountingInterceptor_seesLocalClasses() {
         String prefix = "com.example";
 
-        transformer = HitCountingAgent.buildAgent(prefix)
+        transformer = MEXCountingAgent.buildAgent(prefix)
             .with(AgentBuilder.Listener.StreamWriting.toSystemOut().withTransformationsOnly())
             .installOnByteBuddyAgent();
 

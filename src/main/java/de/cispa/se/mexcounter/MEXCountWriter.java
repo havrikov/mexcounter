@@ -1,4 +1,4 @@
-package de.cispa.se.hitcounter;
+package de.cispa.se.mexcounter;
 
 import com.opencsv.CSVWriter;
 
@@ -7,11 +7,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class HitCountWriter {
+public class MEXCountWriter {
 
     private final CSVWriter csvWriter;
 
-    public HitCountWriter(String outputFilePath) throws IOException {
+    public MEXCountWriter(String outputFilePath) throws IOException {
         File outputFile = new File(outputFilePath);
         outputFile.getAbsoluteFile().getParentFile().mkdirs();
         csvWriter = new CSVWriter(new BufferedWriter(new FileWriter(outputFile)));

@@ -1,5 +1,5 @@
-# HitCounter
-A very simple Java agent that counts method executions and reports them in a CSV file after the targeted process has finished.
+# MEXCounter
+A very simple Java agent that counts **m**ethod **ex**ecutions and reports them in a CSV file after the targeted process has finished.
 
 It works by instrumenting the bytecode of all non-abstract methods of classes matching a given package prefix.
 The method execution counts are collected at runtime in a `ConcurrentHashMap`,
@@ -9,7 +9,7 @@ whose contents are dumped into a CSV file when the JVM finishes.
 
 Run it with
 ```bash
-java -javaagent:path-to-hitcounter.jar=package.prefix,output.csv -jar path-to-target.jar
+java -javaagent:path-to-mexcounter.jar=package.prefix,output.csv -jar path-to-target.jar
 ```
 Where
 - `package.prefix` is the prefix of the package of the classes for which you want the method executions to be counted,
@@ -25,4 +25,4 @@ Build the agent jar with
 ./gradlew build
 ```
 
-This will create a `hitcounter-1.0.0.jar` inside the `build/libs/` directory.
+This will create a `mexcounter-1.0.0.jar` inside the `build/libs/` directory.

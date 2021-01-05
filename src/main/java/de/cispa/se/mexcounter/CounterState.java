@@ -1,4 +1,4 @@
-package de.cispa.se.hitcounter;
+package de.cispa.se.mexcounter;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
