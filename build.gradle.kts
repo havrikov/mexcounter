@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     java
-    kotlin("jvm") version "1.4.10"
+    kotlin("jvm") version "1.4.21"
     id("com.github.johnrengelman.shadow") version "6.1.0"
 }
 
@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    val byteBuddyVersion = "1.10.17"
+    val byteBuddyVersion = "1.10.19"
     implementation("net.bytebuddy", "byte-buddy", byteBuddyVersion)
     implementation("com.opencsv", "opencsv", "5.2")
 
