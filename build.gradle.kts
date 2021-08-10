@@ -3,12 +3,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     java
-    kotlin("jvm") version "1.4.21"
-    id("com.github.johnrengelman.shadow") version "6.1.0"
+    kotlin("jvm") version "1.5.21"
+    id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
 group = "de.cispa.se"
-version = "1.0.0"
+version = "1.0.1"
 
 
 repositories {
@@ -16,11 +16,11 @@ repositories {
 }
 
 dependencies {
-    val byteBuddyVersion = "1.10.19"
+    val byteBuddyVersion = "1.11.12"
     implementation("net.bytebuddy", "byte-buddy", byteBuddyVersion)
     implementation("com.opencsv", "opencsv", "5.2")
 
-    testImplementation("junit", "junit", "4.13.1")
+    testImplementation("junit", "junit", "4.13.2")
     testImplementation("net.bytebuddy", "byte-buddy-agent", byteBuddyVersion)
 }
 
